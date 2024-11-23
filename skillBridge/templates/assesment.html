@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Assessment</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpeg') }}" type="image/x-icon">
+
+    <link rel="stylesheet" href="/static/css/assesment.css">
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <div class="container">
+        <h1>Skill Assessment</h1>
+
+        <!-- Dropdown to Select Skill -->
+        <label for="skills">Select a skill to assess:</label>
+        <select id="skills">
+            <option value="">-- Select Skill --</option>
+        </select>
+        <button id="start-assessment-btn" disabled>Start Assessment</button>
+
+        <!-- Questions Container -->
+        <div id="question-container" class="hidden"></div>
+        <button id="submit-btn" class="hidden">Submit</button>
+    </div>
+
+    <script>
+        let questions = [];
+        let selectedSkill = "";
+
+        function showToast(message, type) {
+            // Create toaster element
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+
+            // Append to body
+            document.body.appendChild(toast);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Fetch user's skills
+        fetch('/get_user_skills')
+            .then(response => response.json())
+            .then(skills => {
+                const skillDropdown = document.getElementById('skills');
+                skills.forEach(skill => {
+                    const option = document.createElement('option');
+                    option.value = skill.name;
+                    option.textContent = skill.name;
+                    skillDropdown.appendChild(option);
+                });
+            });
+
+        // Enable "Start Assessment" button when a skill is selected
+        document.getElementById('skills').addEventListener('change', (event) => {
+            selectedSkill = event.target.value;
+            document.getElementById('start-assessment-btn').disabled = !selectedSkill;
+        });
+
+        // Fetch and display questions for the selected skill
+        document.getElementById('start-assessment-btn').addEventListener('click', () => {
+            selectedSkill = document.getElementById('skills').value;
+
+            // Disable the skill dropdown after starting the assessment
+            document.getElementById('skills').disabled = true;
+
+            fetch(`/fetch_questions/${selectedSkill}`)
+                .then(response => response.json())
+                .then(data => {
+                    questions = data.questions;
+
+                    if (!questions || questions.length === 0) {
+                        showToast("No questions found for the selected skill.", "error");
+                        return;
+                    }
+
+                    const container = document.getElementById('question-container');
+                    container.innerHTML = ""; // Clear previous questions
+
+                    questions.forEach((q, index) => {
+                        const questionHTML = `
+                            <div class="question">
+                                <p>${index + 1}. ${q.question}</p>
+                                <label><input type="radio" name="question-${q.question_id}" value="A"> ${q.options.A}</label><br>
+                                <label><input type="radio" name="question-${q.question_id}" value="B"> ${q.options.B}</label><br>
+                                <label><input type="radio" name="question-${q.question_id}" value="C"> ${q.options.C}</label><br>
+                                <label><input type="radio" name="question-${q.question_id}" value="D"> ${q.options.D}</label>
+                            </div>
+                        `;
+                        container.innerHTML += questionHTML;
+                    });
+
+                    container.classList.remove('hidden');
+                    document.getElementById('submit-btn').classList.remove('hidden');
+                });
+        });
+
+        // Submit assessment
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            const userAnswers = {};
+            let allAnswered = true;
+
+            // Check if all questions have been answered
+            questions.forEach(q => {
+                const selectedAnswer = document.querySelector(`[name="question-${q.question_id}"]:checked`);
+                if (selectedAnswer) {
+                    userAnswers[q.question_id] = selectedAnswer.value;
+                } else {
+                    allAnswered = false;
+                }
+            });
+
+            if (!allAnswered) {
+                alert("Please answer all questions before submitting.");
+                return;
+            }
+
+            fetch('/submit_assessment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ answers: userAnswers, questions: questions, skillId: selectedSkill })
+            })
+                .then(response => response.json())
+                .then(result => {
+                    alert(`Score: ${result.score}\nProficiency: ${result.grade}`);
+
+                    // Refresh the page after displaying the result
+                    location.reload();
+                });
+        });
+    </script>
+  {% include 'footer.html' %}
+
+</body>
+</html>

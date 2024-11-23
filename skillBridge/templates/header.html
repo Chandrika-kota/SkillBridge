@@ -1,0 +1,59 @@
+<header>
+    <div class="header-container">
+        <!-- Logo and Name -->
+        <a href="{{ url_for('home') }}" class="logo">
+            <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Logo" style="height: 40px;"> 
+            <span>SkillBridge</span>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+        </a>
+
+        <!-- Navigation -->
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                {% if session.get('user_id') %}
+                <li><a href="{{ url_for('mentor') }}">Mentor Dashboard</a></li>
+                <li><a href="{{ url_for('mentee') }}">Mentee Dashboard</a></li>
+
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <!-- User Profile Icon -->
+        {% if session.get('user_id') %}
+        <div class="user-icon-container">
+            <div class="user-icon" onclick="toggleMenu()">
+                <img src="{{ url_for('static', filename='images/person_icon.jpeg') }}" alt="User Icon">
+            </div>
+            <div id="profile-menu" class="profile-menu">
+                <ul>
+                    <li><a href="{{ url_for('view_profile') }}">View Profile</a></li>
+                    <li><a href="{{ url_for('edit_profile') }}">Edit Profile</a></li>
+                    <li><a href="{{ url_for('view_certificates') }}">View Certificates</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</header>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("profile-menu");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    // Close the menu when clicking outside of it
+    document.addEventListener("click", (event) => {
+        const menu = document.getElementById("profile-menu");
+        const icon = document.querySelector(".user-icon-container");
+        if (menu && icon && !icon.contains(event.target)) {
+            menu.style.display = "none";
+        }
+    });
+</script>

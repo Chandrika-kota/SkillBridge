@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentee Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mentee.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpeg') }}" type="image/x-icon">
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="container">
+
+        <!-- Top Skills Section -->
+        <section id="top-skills">
+            <h2>Top Skills</h2>
+            <ul id="skills"></ul>
+        </section>
+
+            <!-- Training Requests Section -->
+            <section id="training-requests">
+                <h2>Your Training Requests</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mentor Name</th>
+                            <th>Skill</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="requested-trainings">
+                    </tbody>
+                </table>
+            </section>
+
+        <!-- Start New Skill Training Section -->
+        <section id="start-new-training">
+            <h2>Start New Skill Training</h2>
+            <div class="search-bar">
+                <input type="text" id="skill-search" placeholder="Search for skills...">
+                <button id="search-btn">Search</button>
+            </div>
+            <div id="mentor-list">
+                <h3>Available Mentors</h3>
+                <ul id="mentors"></ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Function to send a training request
+        function sendRequest(mentorId, skillId, startDateId, endDateId, startTimeId, endTimeId) {
+            const startDate = document.getElementById(startDateId).value;
+            const endDate = document.getElementById(endDateId).value;
+            const startTime = document.getElementById(startTimeId).value;
+            const endTime = document.getElementById(endTimeId).value;
+
+            if (!startDate || !endDate || !startTime || !endTime) {
+                alert("Please select a valid date range and time slot.");
+                return;
+            }
+
+            // Validate date range (max 10 days)
+            const dateDiff = (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24);
+            if (dateDiff < 0 || dateDiff > 10) {
+                alert("Date range must be within 10 days.");
+                return;
+            }
+
+            // Validate time slot (max 2 hours)
+            const timeDiff =
+                new Date(`1970-01-01T${endTime}:00`) - new Date(`1970-01-01T${startTime}:00`);
+            if (timeDiff <= 0 || timeDiff > 2 * 60 * 60 * 1000) {
+                alert("Time slot must not exceed 2 hours.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('mentor_id', mentorId);
+            formData.append('skill_id', skillId);
+            formData.append('start_date', startDate);
+            formData.append('end_date', endDate);
+            formData.append('start_time', startTime);
+            formData.append('end_time', endTime);
+
+            fetch('/request_training', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(result => {
+                    alert(result.message);
+                });
+        }
+
+        // Function to toggle mentor details and display the request form
+        function toggleMentorDetails(element, mentorId, skillId) {
+            let detailsDiv = element.querySelector('.send-request-form');
+
+            if (!detailsDiv) {
+                // Create mentor details section if not already created
+                detailsDiv = document.createElement('div');
+                detailsDiv.classList.add('send-request-form');
+                // detailsDiv.innerHTML = `
+                //     <label for="start-date-${mentorId}">Start Date:</label>
+                //     <input type="date" id="start-date-${mentorId}">
+                //     <label for="end-date-${mentorId}">End Date:</label>
+                //     <input type="date" id="end-date-${mentorId}">
+                //     <label for="start-time-${mentorId}">Start Time:</label>
+                //     <input type="time" id="start-time-${mentorId}">
+                //     <label for="end-time-${mentorId}">End Time:</label>
+                //     <input type="time" id="end-time-${mentorId}">
+                //     <button onclick="sendRequest(${mentorId}, ${skillId}, 'start-date-${mentorId}', 'end-date-${mentorId}', 'start-time-${mentorId}', 'end-time-${mentorId}')">
+                //         Send Request
+                //     </button>
+                // `;
+                detailsDiv.innerHTML = `
+    <div class="form-row">
+        <div class="form-column">
+            <label for="start-date-${mentorId}">Start Date:</label>
+            <input type="date" id="start-date-${mentorId}">
+            <label for="end-date-${mentorId}">End Date:</label>
+            <input type="date" id="end-date-${mentorId}">
+        </div>
+        <div class="form-column">
+            <label for="start-time-${mentorId}">Start Time:</label>
+            <input type="time" id="start-time-${mentorId}">
+            <label for="end-time-${mentorId}">End Time:</label>
+            <input type="time" id="end-time-${mentorId}">
+        </div>
+    </div>
+    <button onclick="sendRequest(${mentorId}, ${skillId}, 'start-date-${mentorId}', 'end-date-${mentorId}', 'start-time-${mentorId}', 'end-time-${mentorId}')">
+        Send Request
+    </button>
+`;
+
+
+                // Stop propagation for the new child elements
+                detailsDiv.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent event from bubbling to parent `li`
+                });
+
+                element.appendChild(detailsDiv);
+            }
+
+            // Toggle display
+            detailsDiv.style.display = detailsDiv.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Fetch mentors and top skills
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('search-btn').addEventListener('click', () => {
+                const skill = document.getElementById('skill-search').value;
+
+                fetch(`/search_mentors?skill=${skill}`)
+                    .then(response => response.json())
+                    .then(mentors => {
+                        const mentorList = document.getElementById('mentors');
+                        mentorList.innerHTML = ''; // Clear existing list
+                        if (mentors.length === 0) {
+                    // Display message if no mentors are found
+                    const noMentorsMessage = document.createElement('p');
+                    noMentorsMessage.textContent = 'Sorry! No mentors available for the selected skill.';
+                    noMentorsMessage.classList.add('no-mentors-message'); // Optional: CSS styling
+                    mentorList.appendChild(noMentorsMessage);
+                } else {
+                        mentors.forEach(mentor => {
+                            const li = document.createElement('li');
+                            li.classList.add('mentor-item');
+                            li.textContent = `${mentor.username} (Proficiency: ${mentor.proficiency})`;
+                            li.dataset.mentorId = mentor.user_id;
+                            li.dataset.skillId = mentor.skill_id;
+
+                            // Add click event to toggle mentor details
+                            li.addEventListener('click', () => toggleMentorDetails(li, mentor.user_id, mentor.skill_id));
+
+                            mentorList.appendChild(li);
+                        });}
+                    });
+            });
+                // Fetch training requests
+                fetch('/get_requested_trainings')
+                    .then(response => response.json())
+                    .then(data => {
+                        const trainingTable = document.getElementById('requested-trainings');
+                        trainingTable.innerHTML = ''; // Clear existing rows
+    
+                        data.forEach(training => {
+                            const row = document.createElement('tr');
+                            let statusClass = '';
+    
+                            // Apply appropriate status class
+                            if (training.status === 'Pending') {
+                                statusClass = 'status-pending';
+                            } else if (training.status === 'Denied') {
+                                statusClass = 'status-denied';
+                            } else if (training.status === 'Completed') {
+                                statusClass = 'status-completed';
+                            }
+    
+                            row.innerHTML = `
+                                <td>${training.mentor_name}</td>
+                                <td>${training.skill_name}</td>
+                                <td>${training.start_date}</td>
+                                <td>${training.end_date}</td>
+                                <td class="${statusClass}">${training.status}</td>
+                            `;
+                            trainingTable.appendChild(row);
+                        });
+                    });
+    
+
+            fetch('/top_skills')
+                .then(response => response.json())
+                .then(skills => {
+                    const skillList = document.getElementById('skills');
+                    skillList.innerHTML = ''; // Clear existing list
+
+                    skills.forEach(skill => {
+                        const li = document.createElement('li');
+                        li.textContent = `${skill.skill} (Average Proficiency: ${skill.avg_proficiency})`;
+                        skillList.appendChild(li);
+                    });
+                })
+                .catch(error => console.error('Error fetching top skills:', error));
+        });
+    </script>
+
+    {% include 'footer.html' %}
+</body>
+</html>

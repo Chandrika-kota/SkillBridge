@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #555;
+}
+
+select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+  /* Buttons */
+  button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(90deg, #adb0b3, #818284); /* Consistent gradient */
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 25px;
+    box-shadow: 0 8px 15px rgba(29, 36, 43, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  button:hover {
+    transform: translateY(-3px); /* Lift on hover */
+    box-shadow: 0 15px 25px rgba(49, 51, 52, 0.5);
+  }
+  
+
+.hidden {
+    display: none;
+}
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    color: #fff;
+    background-color: #333;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    z-index: 1000;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.toast.error {
+    background-color: #e74c3c; /* Red for errors */
+}
+
+.toast.success {
+    background-color: #2ecc71; /* Green for success */
+}

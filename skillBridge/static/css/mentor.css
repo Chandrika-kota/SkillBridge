@@ -1,0 +1,175 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f8f9fa; /* Light grey background */
+    color: #495057; /* Dark grey text */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Section Styles */
+section {
+    background: #ffffff; /* White background for sections */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: #495057; /* Consistent dark grey for headings */
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+section h3 {
+    color: #495057;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table thead th {
+    background: #495057; /* Dark grey for table header background */
+    color: white; /* White text for header */
+    padding: 10px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+table tbody td {
+    padding: 10px;
+    border: 1px solid #dee2e6; /* Light grey border */
+}
+
+table tbody tr:nth-child(odd) {
+    background: #f8f9fa; /* Alternating row color */
+}
+
+table tbody tr:hover {
+    background: #e9ecef; /* Light grey hover effect */
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: #007bff; /* Primary blue for links */
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3; /* Darker blue on hover */
+}
+
+/* Status Colors */
+.status-pending {
+    color: #ffc107; /* Amber for pending */
+    font-weight: bold;
+}
+
+.status-denied {
+    color: #dc3545; /* Red for denied */
+    font-weight: bold;
+}
+
+.status-completed {
+    color: #28a745; /* Green for completed */
+    font-weight: bold;
+}
+
+/* Assessment Message Section */
+.message-section {
+    background: #fff3cd; /* Light amber background */
+    color: #856404; /* Dark amber text */
+    padding: 20px;
+    border: 1px solid #ffeeba; /* Amber border */
+    border-radius: 10px;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+/* Buttons */
+.assessment-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #495057; /* Dark grey button */
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.assessment-link:hover {
+    background: #343a40; /* Darker grey on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    section {
+        padding: 15px;
+    }
+
+    table thead th, table tbody td {
+        font-size: 0.9rem;
+    }
+
+    .assessment-link {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
+/* General Styles */
+.hidden {
+    display: none; /* Hides sections by default */
+}
+
+.toggle-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.toggle-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 5px;
+    background: #adb0b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    font-family: 'Arial', sans-serif;
+}
+
+.toggle-button:hover {
+    background: #818284;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px rgba(49, 51, 52, 0.5);
+}
+
+.deny-link {
+    color: #dc3545; /* Red color for deny */
+    text-decoration: none;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.deny-link:hover {
+    text-decoration: underline;
+}

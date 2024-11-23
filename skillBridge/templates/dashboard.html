@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentorship Dashboards</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpeg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="main-content">
+        <div class="dashboard-container">
+            <!-- Mentee Dashboard -->
+            <div class="card">
+                <img src="static/images/mentee.jpg" alt="Mentee Image" class="card-img-top">
+                <div class="card-body">
+                    <h2 class="card-title">Mentee Dashboard</h2>
+                    <p class="card-text">
+                        Manage all your mentees effectively with this comprehensive tool designed for seamless mentorship.
+                    </p>
+                    <ul class="features">
+                        <li>Track mentee progress and goals</li>
+                        <li>Schedule and manage mentorship sessions</li>
+                        <li>Evaluate performance and provide feedback</li>
+                    </ul>
+                    <a href="{{ url_for('mentee') }}" class="btn btn-primary">Go to Mentee Dashboard</a>
+                </div>
+            </div>
+        
+            <!-- Mentor Dashboard -->
+            <div class="card">
+                <img src="static/images/mentor.jpg" alt="Mentor Image" class="card-img-top">
+                <div class="card-body">
+                    <h2 class="card-title">Mentor Dashboard</h2>
+                    <p class="card-text">
+                        Manage and support your mentees effectively with this dedicated dashboard for mentors.
+                    </p>
+                    <ul class="features">
+                        <li>Track mentee progress and milestones</li>
+                        <li>Provide feedback and guidance</li>
+                        <li>Schedule one-on-one mentoring sessions</li>
+                    </ul>
+                    <a href="{{ url_for('mentor') }}" class="btn btn-primary">Go to Mentor Dashboard</a>
+                </div>
+            </div>
+        
+            <!-- Assessment Dashboard -->
+            <div class="card">
+                <img src="static/images/assesment.jpg" alt="Assessment Image" class="card-img-top">
+                <div class="card-body">
+                    <h2 class="card-title">Assessment Dashboard</h2>
+                    <p class="card-text">
+                        Evaluate and assess mentees' performance effectively with this detailed assessment tool.
+                    </p>
+                    <ul class="features">
+                        <li>Assess mentee skills and development</li>
+                        <li>Provide constructive feedback and evaluation</li>
+                        <li>Set future goals and learning milestones</li>
+                    </ul>
+                    <a href="{{ url_for('home') }}" class="btn btn-primary">Go to Assessment Dashboard</a>
+                </div>
+            </div>
+        </div>
+         </div>
+
+    {% include 'footer.html' %} 
+</body>
+
+</html>

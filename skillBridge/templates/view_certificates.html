@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Certificates</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpeg') }}" type="image/x-icon">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpeg') }}" type="image/x-icon">
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="container">
+        <section class="certificate-section">
+            <h2>Your Certificates</h2>
+            {% if certificates %}
+            <ul class="certificate-list">
+                {% for certificate in certificates %}
+                <li class="certificate-item">
+                    <p><strong>Skill:</strong> {{ certificate.skill_name }}</p>
+                    <p><strong>Completed on:</strong> {{ certificate.end_date }}</p>
+                    <a href="{{ url_for('download_certificate', certificate_url=certificate.certificate_url) }}" 
+                       class="btn" download>
+                       Download Certificate
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No certificates available.</p>
+            {% endif %}
+        </section>
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>

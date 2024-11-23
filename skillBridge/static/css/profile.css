@@ -1,0 +1,155 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f8f9fa;
+    color: #495057;
+}
+
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+/* Section Styles */
+.profile-section, .certificate-section {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #495057;
+}
+
+/* Profile Info */
+.profile-info p {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+/* Buttons */
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(90deg, #adb0b3, #818284); /* Consistent gradient */
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 25px;
+    box-shadow: 0 8px 15px rgba(29, 36, 43, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .btn:hover {
+    transform: translateY(-3px); /* Lift on hover */
+    box-shadow: 0 15px 25px rgba(49, 51, 52, 0.5);
+  }
+  
+.btn.secondary {
+    background: #6c757d;
+}
+
+.btn.secondary:hover {
+    background: #5a6268;
+}
+
+/* Form Styles */
+.edit-form label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #495057;
+}
+
+.edit-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.edit-form .form-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.certificate-section {
+    margin-top: 20px;
+}
+
+.certificate-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.certificate-item {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.certificate-item p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.certificate-item .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.certificate-item .btn:hover {
+    background-color: #0056b3;
+}
+
+.skills-section {
+    margin-top: 20px;
+}
+
+.skills-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+.skills-section table th,
+.skills-section table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.skills-section table th {
+    background-color: #7b7f84;
+    color: white;
+}
+
+.skills-section table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.skills-section table tr:hover {
+    background-color: #ddd;
+}

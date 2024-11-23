@@ -1,0 +1,262 @@
+/* Registration Page Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.site-header {
+  position: relative;
+}
+
+.header__logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.header__logo-image {
+    max-height: 50px;
+}
+
+.form-container {
+  max-width: 400px;
+  margin: 100px auto 2rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  cursor: pointer;
+  
+}
+button:hover {
+  background-color: #138496;
+}
+/* General styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; /* Pure white background */
+  color: #000000; /* Black text for high contrast */
+}
+
+.header-container {
+  display: flex;
+  align-items: center; /* Vertically center align */
+  justify-content: space-between; /* Space between logo and navigation */
+  padding: 10px 20px; /* Padding around the header */
+  background-color: #fffdfd; /* Match background with login container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.header-container .logo {
+  display: flex; /* Flexbox to align items */
+  align-items: center; /* Center items vertically */
+  text-decoration: none; /* Remove underline from links */
+  color: #000000; /* Set logo text color to black */
+  font-weight: normal; /* Set font weight to normal */
+}
+
+.header-container .logo img {
+  margin-right: 10px; /* Space between logo and text */
+}
+
+.header-container nav ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  display: flex; /* Flexbox for horizontal layout */
+}
+
+.header-container nav ul li {
+  margin-left: 20px; /* Space between navigation items */
+}
+
+.header-container nav ul li a {
+  text-decoration: none; /* Remove underline from links */
+  color: #0066cc; /* Link color */
+  font-weight: bold; /* Bold text for links */
+}
+
+.header-container nav ul li a:hover {
+  text-decoration: none; /* No underline on hover */
+}
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #343a40;
+  color: white;
+}
+/* General styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; /* Pure white background */
+  color: #000000; /* Black text for high contrast */
+}
+
+.header-container {
+  display: flex;
+  align-items: center; /* Vertically center align */
+  justify-content: space-between; /* Space between logo and navigation */
+  padding: 10px 20px; /* Padding around the header */
+  background-color: #fffdfd; /* Match background with login container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.header-container .logo {
+  display: flex; /* Flexbox to align items */
+  align-items: center; /* Center items vertically */
+  text-decoration: none; /* Remove underline from links */
+  color: #000000; /* Set logo text color to black */
+  font-weight: normal; /* Set font weight to normal */
+}
+
+.header-container .logo img {
+  margin-right: 10px; /* Space between logo and text */
+}
+
+.header-container nav ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  display: flex; /* Flexbox for horizontal layout */
+}
+
+.header-container nav ul li {
+  margin-left: 20px; /* Space between navigation items */
+}
+
+.header-container nav ul li a {
+  text-decoration: none; /* Remove underline from links */
+  color: #0066cc; /* Link color */
+  font-weight: bold; /* Bold text for links */
+}
+
+.header-container nav ul li a:hover {
+  text-decoration: none; /* No underline on hover */
+}
+
+
+#skills-list {
+  list-style: none; /* Remove bullet points */
+  border: 1px solid #ddd;
+  border-top: none;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 150px; /* Limit dropdown height */
+  z-index: 10;
+  position: absolute; /* Ensure dropdown stays below input field */
+  padding: 0;
+  margin: 0;
+  visibility: hidden; /* Initially hidden */
+  opacity: 0; /* Fully transparent */
+  transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transitions */
+}
+
+#skills-list.visible {
+  visibility: visible; /* Make dropdown visible */
+  opacity: 1; /* Fully opaque */
+}
+
+#skills-list li {
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-bottom: 1px solid #fba86c; /* Subtle separation */
+}
+
+#skills-list li:last-child {
+  border-bottom: none; /* Remove border from last item */
+}
+
+#skills-list li:hover {
+  background-color: #e9f5f9;
+}
+
+/* Selected skills styling */
+#selected-skills {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.skill-tag {
+  background-color: #a9a19d45;
+  color: rgb(12, 11, 11);
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.skill-tag .remove-skill {
+  cursor: pointer;
+  background-color: #ff6b6b;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  margin-left: 5px;
+  font-size: 1rem;
+}
+
+.skill-tag .remove-skill:hover {
+  background-color: #e04f4f;
+}
+
+
+.skill-tag {
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+}
+
+.skill-tag input[type="range"] {
+  margin: 0 10px;
+  width: 150px;
+}
+
+.skill-tag .remove-skill {
+  cursor: pointer;
+  background-color: #ff6b6b;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 1rem;
+}
+
+.skill-tag .remove-skill:hover {
+  background-color: #e04f4f;
+}

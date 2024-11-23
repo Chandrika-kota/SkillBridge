@@ -1,0 +1,241 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f8f9fa;
+    color: #333;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Section Styles */
+section {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: #495057;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+section h3 {
+    color: #495057;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+/* Top Skills */
+#skills {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+#skills li {
+    background: #f1f3f5;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+}
+
+/* Training Requests */
+#training-requests table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#training-requests table thead th {
+    background: #495057;
+    color: white;
+    padding: 10px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+#training-requests table tbody td {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+}
+
+#training-requests table tbody tr:nth-child(odd) {
+    background: #f8f9fa;
+}
+
+#training-requests table tbody tr:hover {
+    background: #e9ecef;
+}
+
+/* Status Colors */
+.status-pending {
+    color: #ffc107; /* Amber for pending */
+    font-weight: bold;
+}
+
+.status-denied {
+    color: #dc3545; /* Red for denied */
+    font-weight: bold;
+}
+
+.status-completed {
+    color: #28a745; /* Green for completed */
+    font-weight: bold;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.search-bar input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #adb5bd;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+    background: #ffffff;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    background: #495057;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.search-bar button:hover {
+    background: #343a40;
+}
+
+/* Mentor List */
+#mentor-list {
+    margin-top: 20px;
+}
+
+#mentors {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.mentor-item {
+    background: #f1f3f5;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.mentor-item:hover {
+    background: #e9ecef;
+}
+
+/* Send Request Form */
+/* General Styles for the Send Request Form */
+.mentor-item .send-request-form {
+    background-color: #ffffff; /* White background */
+    border: 1px solid #dee2e6; /* Light grey border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 20px; /* Padding inside */
+    margin-top: 10px; /* Space above the form */
+    max-width: 600px; /* Restrict maximum width */
+    display: block; /* Ensure visibility */
+}
+
+/* Form Row to Contain Columns */
+.mentor-item .send-request-form .form-row {
+    display: flex;
+    justify-content: space-between; /* Space between the two columns */
+    gap: 15px; /* Spacing between columns */
+}
+
+/* Form Columns for Dates and Times */
+.mentor-item .send-request-form .form-column {
+    flex: 1; /* Allow columns to have equal width */
+    padding:20px;
+}
+
+/* Form Labels */
+.mentor-item .send-request-form label {
+    display: block;
+    font-size: 0.9rem;
+    color: #495057; /* Grey for labels */
+    margin-bottom: 5px;
+}
+
+/* Form Inputs */
+.mentor-item .send-request-form input[type="date"],
+.mentor-item .send-request-form input[type="time"] {
+    width: 100%; /* Full width for inputs */
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ced4da; /* Light grey border */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 15px; /* Space between inputs */
+    background: #f8f9fa; /* Subtle grey background */
+    transition: border-color 0.3s ease;
+}
+
+/* Input Focus Styles */
+.mentor-item .send-request-form input[type="date"]:focus,
+.mentor-item .send-request-form input[type="time"]:focus {
+    border-color: #007bff; /* Blue border on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Submit Button */
+.mentor-item .send-request-form button {
+    display: block;
+    width: 100%; /* Full width button */
+    padding: 10px;
+    background-color: #007bff; /* Primary blue color */
+    color: #ffffff; /* White text */
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button Hover Effect */
+.mentor-item .send-request-form button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .mentor-item .send-request-form .form-row {
+        flex-direction: column; /* Stack columns on smaller screens */
+    }
+
+    .mentor-item .send-request-form .form-column {
+        margin-bottom: 15px; /* Add spacing between stacked columns */
+    }
+}

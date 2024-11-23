@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor Dashboard</title>
+    <link rel="stylesheet" href="/static/css/mentor.css">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpeg') }}" type="image/x-icon">
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <main>
+        <h1>Mentor Dashboard</h1>
+
+        {% if no_high_proficiency %}
+        <section class="message-section">
+            <p>You have no skill with high proficiency to be a mentor. Please go through the assessment to get your proficiencies updated.</p>
+            <a href="/assessment" class="assessment-link">Take Assessment</a>
+        </section>
+        {% else %}
+
+        <!-- Buttons to Toggle Tables -->
+        <section class="toggle-section">
+            <button class="toggle-button" onclick="showTable('ongoing-table')">Ongoing Trainings</button>
+            <button class="toggle-button" onclick="showTable('pending-table')">Review Pending Requests</button>
+            <button class="toggle-button" onclick="showTable('completed-table')">Completed Trainings</button>
+        </section>
+
+        <!-- Ongoing Trainings -->
+        <section id="ongoing-table" class="training-section">
+            <h2>Ongoing Trainings</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mentee Name</th>
+                        <th>Skill</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for training in ongoing_trainings %}
+                    <tr>
+                        <td>{{ training.mentee_name }}</td>
+                        <td>{{ training.skill_name }}</td>
+                        <td>{{ training.start_date }}</td>
+                        <td>{{ training.end_date }}</td>
+                        <td>
+                            <a href="{{ url_for('complete_training', request_id=training.request_id) }}" class="mark-complete">Mark Complete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Pending Training Requests -->
+        <section id="pending-table" class="training-section hidden">
+            <h2>Review Pending Requests</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mentee Name</th>
+                        <th>Skill</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in training_requests %}
+                    <tr>
+                        <td>{{ request.mentee_name }}</td>
+                        <td>{{ request.skill_name }}</td>
+                        <td>{{ request.start_date }}</td>
+                        <td>{{ request.end_date }}</td>
+                        <td>{{ request.start_time }}</td>
+                        <td>{{ request.end_time }}</td>
+                        <td>
+                            <a href="{{ url_for('approve_training', request_id=request.request_id) }}">Approve</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Completed Trainings -->
+        <section id="completed-table" class="training-section hidden">
+            <h2>Completed Trainings</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mentee Name</th>
+                        <th>Skill</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for training in completed_trainings %}
+                    <tr>
+                        <td>{{ training.mentee_name }}</td>
+                        <td>{{ training.skill_name }}</td>
+                        <td>{{ training.start_date }}</td>
+                        <td>{{ training.end_date }}</td>
+                        <td>
+                            <a href="{{ training.certificate_url }}" download>Download Certificate</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        {% endif %}
+    </main>
+
+    {% include 'footer.html' %}
+
+    <script>
+        function showTable(tableId) {
+            // Hide all tables
+            document.querySelectorAll('.training-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            // Show the selected table
+            document.getElementById(tableId).classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

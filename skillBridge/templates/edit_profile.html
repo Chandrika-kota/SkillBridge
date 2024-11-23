@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpeg') }}" type="image/x-icon">
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="container">
+        <section class="profile-section">
+            <h2>Edit Profile</h2>
+            <form method="POST" class="edit-form">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" value="{{ user['username'] }}" required>
+
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" value="{{ user['email'] }}" required>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn">Save Changes</button>
+                    <a href="{{ url_for('view_profile') }}" class="btn secondary">Cancel</a>
+                </div>
+            </form>
+        </section>
+    </div>
+    {% include 'footer.html' %} 
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+/* General Header Styles */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #d4dbe2; /* Light grey background to match buttons */
+    color: #2e2f31; /* Consistent dark grey text */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif; /* Matching font style */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #353637; /* Dark grey for logo text */
+    font-size: 1.5rem;
+}
+
+.logo img {
+    margin-right: 10px;
+    border-radius: 20px;
+}
+.logo img:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px rgba(49, 51, 52, 0.5);
+  }
+  
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #252627; /* Neutral grey for nav links */
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #1a1b1b; /* Slightly darker grey on hover */
+    transform: translateY(-3px);
+}
+
+/* User Icon and Profile Menu */
+.user-icon-container {
+    position: relative;
+}
+
+.user-icon {
+    width: 40px;
+    height: 40px;
+    background: #6c6d6e; /* Matching button gradient colors */
+    border-radius: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.user-icon:hover {
+    transform: translateY(-3px); /* Lift on hover */
+    box-shadow: 0 15px 25px rgba(49, 51, 52, 0.5);
+
+}
+
+.user-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Profile Menu */
+.profile-menu {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background: #ffffff; /* White dropdown background */
+    color: #6c757d; /* Neutral grey text */
+    border: 1px solid #dee2e6; /* Light grey border */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 100;
+    min-width: 160px;
+}
+
+.profile-menu ul {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    font-family: 'Arial', sans-serif; /* Matching font style */
+}
+
+.profile-menu ul li {
+    padding: 10px;
+}
+
+.profile-menu ul li a {
+    border-radius: 14px;
+    text-decoration: none;
+    color: #343a40; /* Dark grey text for dropdown links */
+    font-size: 1rem;
+    transition: background 0.3s, color 0.3s;
+}
+
+.profile-menu ul li a:hover {
+    color: #adb0b3; /* Soft grey highlight */
+    box-shadow: 0 15px 25px rgba(131, 134, 135, 0.5);
+    transform: translateY(-3px);
+
+}
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #adb0b3; /* Consistent grey to match buttons and header */
+    color: #343a40; /* Dark grey text */
+    font-size: 0.9rem;
+    font-family: 'Arial', sans-serif; /* Matching font style */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+footer a {
+    text-decoration: none;
+    color: #6c757d; /* Neutral grey links */
+    font-weight: bold;
+    font-family: 'Arial', sans-serif; /* Matching font style */
+}
+
+footer a:hover {
+    color: #818284; /* Slightly darker grey on hover */
+    transform: translateY(-3px);
+
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpeg') }}" type="image/x-icon"> <!-- Favicon link -->
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="container">
+        <!-- Profile Information -->
+        <section class="profile-section">
+            <h2>Profile Information</h2>
+            <div class="profile-info">
+                <p><strong>Username:</strong> {{ user['username'] }}</p>
+                <p><strong>Email:</strong> {{ user['email'] }}</p>
+            </div>
+            <div class="actions">
+                <a href="{{ url_for('edit_profile') }}" class="btn">Edit Profile</a>
+            </div>
+        </section>
+
+        <!-- Skills and Proficiency -->
+        <section class="skills-section">
+            <h2>Skills and Proficiency</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Skill</th>
+                        <th>Proficiency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for skill in skills %}
+                    <tr>
+                        <td>{{ skill['name'] }}</td>
+                        <td>{{ skill['proficiency'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>
