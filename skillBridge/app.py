@@ -365,6 +365,7 @@ def loginOp():
 
 @app.route('/registrationOp', methods=['GET', 'POST'])
 def registrationOp():
+    connection = connect_to_db()
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')  # Plaintext password
