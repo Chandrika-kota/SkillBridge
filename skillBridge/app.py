@@ -27,6 +27,7 @@ connection = connect_to_db()
 
 @app.route('/')
 def home():
+    print("Home page started for SKillBridge")
     return render_template('home.html')
 @app.route('/login')
 def login():
