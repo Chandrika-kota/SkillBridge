@@ -366,6 +366,7 @@ def loginOp():
 @app.route('/registrationOp', methods=['GET', 'POST'])
 def registrationOp():
     connection = connect_to_db()
+    cursor = connection.cursor()
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')  # Plaintext password
@@ -380,7 +381,6 @@ def registrationOp():
 
         if connection:
             try:
-                cursor = connection.cursor()
                 # Check if username or email already exists
                 query = "SELECT * FROM Users WHERE username = %s OR email = %s"
                 cursor.execute(query, (username, email))
