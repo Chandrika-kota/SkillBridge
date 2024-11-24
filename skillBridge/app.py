@@ -447,6 +447,7 @@ def forgot_passwordOp():
 @app.route('/get_skills', methods=['GET'])
 def get_skills():
     query = request.args.get('query', '')
+    connection = connect_to_db()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("SELECT name FROM Skills WHERE name LIKE %s", (f"%{query}%",))
     skills = cursor.fetchall()
