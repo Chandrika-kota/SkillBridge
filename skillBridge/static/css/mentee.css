@@ -133,7 +133,7 @@ section h3 {
     margin-top: 20px;
 }
 
-#mentors {
+/* #mentors {
     list-style: none;
     padding: 0;
     display: grid;
@@ -155,17 +155,74 @@ section h3 {
     background: #e9ecef;
 }
 
-/* Send Request Form */
-/* General Styles for the Send Request Form */
+
 .mentor-item .send-request-form {
-    background-color: #ffffff; /* White background */
-    border: 1px solid #dee2e6; /* Light grey border */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    padding: 20px; /* Padding inside */
-    margin-top: 10px; /* Space above the form */
-    max-width: 600px; /* Restrict maximum width */
-    display: block; /* Ensure visibility */
+    background-color: #ffffff; 
+        border: 1px solid #dee2e6; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 20px; 
+    margin-top: 10px;
+    max-width: 600px; 
+    display: block; 
+} */
+
+/* Mentor List */
+#mentors {
+    display: flex; /* Use flexbox for rows */
+    flex-wrap: wrap; /* Allow wrapping for multiple rows */
+    gap: 20px; /* Space between mentors */
+    justify-content: center; /* Center the mentors within the container */
+    margin-top: 20px;
+}
+
+.mentor-item {
+    flex: 1 1 calc(50% - 20px); /* Each item takes 1/3 of the row with a gap */
+    max-width: 100%; /* Restrict maximum width */
+    box-sizing: border-box; /* Include padding and border in width */
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa; /* Light grey background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.mentor-item:hover {
+    background: #e9ecef; /* Slightly darker background on hover */
+    transform: translateY(-5px); /* Slight upward movement on hover */
+}
+
+/* Send Request Form */
+.mentor-item .send-request-form {
+    margin-top: 10px;
+    padding: 0px;
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* display: block; */
+    width: 100%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .mentor-item {
+        flex: 1 1 calc(50% - 20px); /* Two items per row on tablets */
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .mentor-item {
+        flex: 1 1 100%; /* One item per row on smaller devices */
+        max-width: 100%;
+    }
+
+    .mentor-item .send-request-form {
+        width: 100%; /* Full width for smaller screens */
+    }
 }
 
 /* Form Row to Contain Columns */
@@ -193,7 +250,7 @@ section h3 {
 .mentor-item .send-request-form input[type="date"],
 .mentor-item .send-request-form input[type="time"] {
     width: 100%; /* Full width for inputs */
-    padding: 10px;
+    padding: 0px;
     font-size: 1rem;
     border: 1px solid #ced4da; /* Light grey border */
     border-radius: 5px; /* Rounded corners */

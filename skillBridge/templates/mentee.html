@@ -96,92 +96,179 @@
         }
 
         // Function to toggle mentor details and display the request form
-        function toggleMentorDetails(element, mentorId, skillId) {
-            let detailsDiv = element.querySelector('.send-request-form');
+//         function toggleMentorDetails(element, mentorId, skillId) {
+//             let detailsDiv = element.querySelector('.send-request-form');
 
-            if (!detailsDiv) {
-                // Create mentor details section if not already created
-                detailsDiv = document.createElement('div');
-                detailsDiv.classList.add('send-request-form');
-                // detailsDiv.innerHTML = `
-                //     <label for="start-date-${mentorId}">Start Date:</label>
-                //     <input type="date" id="start-date-${mentorId}">
-                //     <label for="end-date-${mentorId}">End Date:</label>
-                //     <input type="date" id="end-date-${mentorId}">
-                //     <label for="start-time-${mentorId}">Start Time:</label>
-                //     <input type="time" id="start-time-${mentorId}">
-                //     <label for="end-time-${mentorId}">End Time:</label>
-                //     <input type="time" id="end-time-${mentorId}">
-                //     <button onclick="sendRequest(${mentorId}, ${skillId}, 'start-date-${mentorId}', 'end-date-${mentorId}', 'start-time-${mentorId}', 'end-time-${mentorId}')">
-                //         Send Request
-                //     </button>
-                // `;
-                detailsDiv.innerHTML = `
-    <div class="form-row">
-        <div class="form-column">
-            <label for="start-date-${mentorId}">Start Date:</label>
-            <input type="date" id="start-date-${mentorId}">
-            <label for="end-date-${mentorId}">End Date:</label>
-            <input type="date" id="end-date-${mentorId}">
-        </div>
-        <div class="form-column">
-            <label for="start-time-${mentorId}">Start Time:</label>
-            <input type="time" id="start-time-${mentorId}">
-            <label for="end-time-${mentorId}">End Time:</label>
-            <input type="time" id="end-time-${mentorId}">
-        </div>
-    </div>
-    <button onclick="sendRequest(${mentorId}, ${skillId}, 'start-date-${mentorId}', 'end-date-${mentorId}', 'start-time-${mentorId}', 'end-time-${mentorId}')">
-        Send Request
-    </button>
-`;
+//             if (!detailsDiv) {
+//                 // Create mentor details section if not already created
+//                 detailsDiv = document.createElement('div');
+//                 detailsDiv.classList.add('send-request-form');
+//                 // detailsDiv.innerHTML = `
+//                 //     <label for="start-date-${mentorId}">Start Date:</label>
+//                 //     <input type="date" id="start-date-${mentorId}">
+//                 //     <label for="end-date-${mentorId}">End Date:</label>
+//                 //     <input type="date" id="end-date-${mentorId}">
+//                 //     <label for="start-time-${mentorId}">Start Time:</label>
+//                 //     <input type="time" id="start-time-${mentorId}">
+//                 //     <label for="end-time-${mentorId}">End Time:</label>
+//                 //     <input type="time" id="end-time-${mentorId}">
+//                 //     <button onclick="sendRequest(${mentorId}, ${skillId}, 'start-date-${mentorId}', 'end-date-${mentorId}', 'start-time-${mentorId}', 'end-time-${mentorId}')">
+//                 //         Send Request
+//                 //     </button>
+//                 // `;
+//                 detailsDiv.innerHTML = `
+//     <div class="form-row">
+//         <div class="form-column">
+//             <label for="start-date-${mentorId}">Start Date:</label>
+//             <input type="date" id="start-date-${mentorId}">
+//             <label for="end-date-${mentorId}">End Date:</label>
+//             <input type="date" id="end-date-${mentorId}">
+//         </div>
+//         <div class="form-column">
+//             <label for="start-time-${mentorId}">Start Time:</label>
+//             <input type="time" id="start-time-${mentorId}">
+//             <label for="end-time-${mentorId}">End Time:</label>
+//             <input type="time" id="end-time-${mentorId}">
+//         </div>
+//     </div>
+//     <button onclick="sendRequest(${mentorId}, ${skillId}, 'start-date-${mentorId}', 'end-date-${mentorId}', 'start-time-${mentorId}', 'end-time-${mentorId}')">
+//         Send Request
+//     </button>
+// `;
 
 
-                // Stop propagation for the new child elements
-                detailsDiv.addEventListener('click', (event) => {
-                    event.stopPropagation(); // Prevent event from bubbling to parent `li`
-                });
+//                 // Stop propagation for the new child elements
+//                 detailsDiv.addEventListener('click', (event) => {
+//                     event.stopPropagation(); // Prevent event from bubbling to parent `li`
+//                 });
 
-                element.appendChild(detailsDiv);
-            }
+//                 element.appendChild(detailsDiv);
+//             }
 
-            // Toggle display
-            detailsDiv.style.display = detailsDiv.style.display === 'block' ? 'none' : 'block';
+//             // Toggle display
+//             detailsDiv.style.display = detailsDiv.style.display === 'block' ? 'none' : 'block';
+//         }
+
+// Function to toggle mentor details and display the request form
+function toggleMentorDetails(element, mentorId, skillId) {
+    // Close any other open forms
+    const allForms = document.querySelectorAll('.send-request-form');
+    allForms.forEach(form => {
+        if (form.parentElement !== element) {
+            form.style.display = 'none'; // Hide all forms except the one being toggled
         }
+    });
+
+    // Check if the form is already present in the current mentor card
+    let detailsDiv = element.querySelector('.send-request-form');
+    if (!detailsDiv) {
+        // Create mentor details section if not already created
+        detailsDiv = document.createElement('div');
+        detailsDiv.classList.add('send-request-form');
+        detailsDiv.innerHTML = `
+            <div class="form-row">
+                <div class="form-column">
+                    <label for="start-date-${mentorId}">Start Date:</label>
+                    <input type="date" id="start-date-${mentorId}">
+                    <label for="end-date-${mentorId}">End Date:</label>
+                    <input type="date" id="end-date-${mentorId}">
+                </div>
+                <div class="form-column">
+                    <label for="start-time-${mentorId}">Start Time:</label>
+                    <input type="time" id="start-time-${mentorId}">
+                    <label for="end-time-${mentorId}">End Time:</label>
+                    <input type="time" id="end-time-${mentorId}">
+                </div>
+            </div>
+            <button onclick="sendRequest(${mentorId}, ${skillId}, 'start-date-${mentorId}', 'end-date-${mentorId}', 'start-time-${mentorId}', 'end-time-${mentorId}')">
+                Send Request
+            </button>
+        `;
+
+        // Add the form to the current mentor element
+        element.appendChild(detailsDiv);
+    }
+
+    // Toggle visibility of the form in the current mentor card
+    detailsDiv.style.display = detailsDiv.style.display === 'block' ? 'none' : 'block';
+}
 
         // Fetch mentors and top skills
         document.addEventListener('DOMContentLoaded', () => {
+            // document.getElementById('search-btn').addEventListener('click', () => {
+            //     const skill = document.getElementById('skill-search').value;
+
+            //     fetch(`/search_mentors?skill=${skill}`)
+            //         .then(response => response.json())
+            //         .then(mentors => {
+            //             const mentorList = document.getElementById('mentors');
+            //             mentorList.innerHTML = ''; // Clear existing list
+            //             if (mentors.length === 0) {
+            //         // Display message if no mentors are found
+            //         const noMentorsMessage = document.createElement('p');
+            //         noMentorsMessage.textContent = 'Sorry! No mentors available for the selected skill.';
+            //         noMentorsMessage.classList.add('no-mentors-message'); // Optional: CSS styling
+            //         mentorList.appendChild(noMentorsMessage);
+            //     } else {
+            //             mentors.forEach(mentor => {
+            //                 const li = document.createElement('li');
+            //                 li.classList.add('mentor-item');
+            //                 li.textContent = `${mentor.username} (Proficiency: ${mentor.proficiency})`;
+            //                 li.dataset.mentorId = mentor.user_id;
+            //                 li.dataset.skillId = mentor.skill_id;
+
+            //                 // Add click event to toggle mentor details
+            //                 li.addEventListener('click', () => toggleMentorDetails(li, mentor.user_id, mentor.skill_id));
+
+            //                 mentorList.appendChild(li);
+            //             });}
+            //         });
+            // });
+
+            // Fetch training requests
             document.getElementById('search-btn').addEventListener('click', () => {
-                const skill = document.getElementById('skill-search').value;
+    const skill = document.getElementById('skill-search').value;
 
-                fetch(`/search_mentors?skill=${skill}`)
-                    .then(response => response.json())
-                    .then(mentors => {
-                        const mentorList = document.getElementById('mentors');
-                        mentorList.innerHTML = ''; // Clear existing list
-                        if (mentors.length === 0) {
-                    // Display message if no mentors are found
-                    const noMentorsMessage = document.createElement('p');
-                    noMentorsMessage.textContent = 'Sorry! No mentors available for the selected skill.';
-                    noMentorsMessage.classList.add('no-mentors-message'); // Optional: CSS styling
-                    mentorList.appendChild(noMentorsMessage);
-                } else {
-                        mentors.forEach(mentor => {
-                            const li = document.createElement('li');
-                            li.classList.add('mentor-item');
-                            li.textContent = `${mentor.username} (Proficiency: ${mentor.proficiency})`;
-                            li.dataset.mentorId = mentor.user_id;
-                            li.dataset.skillId = mentor.skill_id;
+    fetch(`/search_mentors?skill=${skill}`)
+        .then(response => response.json())
+        .then(mentors => {
+            const mentorListContainer = document.getElementById('mentors');
+            mentorListContainer.innerHTML = ''; // Clear existing mentors
 
-                            // Add click event to toggle mentor details
-                            li.addEventListener('click', () => toggleMentorDetails(li, mentor.user_id, mentor.skill_id));
+            if (mentors.length === 0) {
+                const noMentorsMessage = document.createElement('p');
+                noMentorsMessage.textContent = 'Sorry! No mentors available for the selected skill.';
+                noMentorsMessage.classList.add('no-mentors-message'); // Optional CSS styling
+                mentorListContainer.appendChild(noMentorsMessage);
+            } else {
+                // Iterate through mentors and create rows
+                let row;
+                mentors.forEach((mentor, index) => {
+                    // Create a new row for every 3 mentors
+                    if (index % 2 === 0) {
+                        row = document.createElement('div');
+                        row.classList.add('mentor-row'); // Apply a row class for styling
+                        mentorListContainer.appendChild(row);
+                    }
 
-                            mentorList.appendChild(li);
-                        });}
-                    });
-            });
-                // Fetch training requests
-                fetch('/get_requested_trainings')
+                    // Create a mentor item
+                    const mentorItem = document.createElement('div');
+                    mentorItem.classList.add('mentor-item');
+                    mentorItem.textContent = `${mentor.username} (Proficiency: ${mentor.proficiency})`;
+                    mentorItem.dataset.mentorId = mentor.user_id;
+                    mentorItem.dataset.skillId = mentor.skill_id;
+
+                    // Add click event to toggle mentor details
+                    mentorItem.addEventListener('click', () => toggleMentorDetails(mentorItem, mentor.user_id, mentor.skill_id));
+
+                    row.appendChild(mentorItem);
+                });
+            }
+        })
+        .catch(error => console.error('Error fetching mentors:', error));
+});
+
+            fetch('/get_requested_trainings')
                     .then(response => response.json())
                     .then(data => {
                         const trainingTable = document.getElementById('requested-trainings');
