@@ -150,10 +150,54 @@
 //         }
 
 // Function to toggle mentor details and display the request form
+// function toggleMentorDetails(element, mentorId, skillId) {
+//     // Close any other open forms
+//     const allForms = document.querySelectorAll('.send-request-form');
+//     allForms.forEach(form => {
+//         if (form.parentElement !== element) {
+//             form.style.display = 'none'; // Hide all forms except the one being toggled
+//         }
+//     });
+
+//     // Check if the form is already present in the current mentor card
+//     let detailsDiv = element.querySelector('.send-request-form');
+//     if (!detailsDiv) {
+//         // Create mentor details section if not already created
+//         detailsDiv = document.createElement('div');
+//         detailsDiv.classList.add('send-request-form');
+//         detailsDiv.innerHTML = `
+//             <div class="form-row">
+//                 <div class="form-column">
+//                     <label for="start-date-${mentorId}">Start Date:</label>
+//                     <input type="date" id="start-date-${mentorId}">
+//                     <label for="end-date-${mentorId}">End Date:</label>
+//                     <input type="date" id="end-date-${mentorId}">
+//                 </div>
+//                 <div class="form-column">
+//                     <label for="start-time-${mentorId}">Start Time:</label>
+//                     <input type="time" id="start-time-${mentorId}">
+//                     <label for="end-time-${mentorId}">End Time:</label>
+//                     <input type="time" id="end-time-${mentorId}">
+//                 </div>
+//             </div>
+//             <button onclick="sendRequest(${mentorId}, ${skillId}, 'start-date-${mentorId}', 'end-date-${mentorId}', 'start-time-${mentorId}', 'end-time-${mentorId}')">
+//                 Send Request
+//             </button>
+//         `;
+
+//         // Add the form to the current mentor element
+//         element.appendChild(detailsDiv);
+//     }
+
+//     // Toggle visibility of the form in the current mentor card
+//     detailsDiv.style.display = detailsDiv.style.display === 'block' ? 'none' : 'block';
+// }
+
+// Function to toggle mentor details and display the request form
 function toggleMentorDetails(element, mentorId, skillId) {
     // Close any other open forms
     const allForms = document.querySelectorAll('.send-request-form');
-    allForms.forEach(form => {
+    allForms.forEach((form) => {
         if (form.parentElement !== element) {
             form.style.display = 'none'; // Hide all forms except the one being toggled
         }
@@ -185,16 +229,30 @@ function toggleMentorDetails(element, mentorId, skillId) {
             </button>
         `;
 
-        // Add the form to the current mentor element
+        // Add a click listener to the form to prevent the event from propagating
+        detailsDiv.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent the click from reaching the global listener
+        });
+
+        // Append the form to the mentor card
         element.appendChild(detailsDiv);
     }
 
-    // Toggle visibility of the form in the current mentor card
+    // Toggle the visibility of the form
     detailsDiv.style.display = detailsDiv.style.display === 'block' ? 'none' : 'block';
-}
-
-        // Fetch mentors and top skills
+}// Fetch mentors and top skills
         document.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('click', (event) => {
+    const isMentorItem = event.target.closest('.mentor-item'); // Check if clicked inside a mentor item
+    const isInsideForm = event.target.closest('.send-request-form'); // Check if clicked inside the form
+
+    if (!isMentorItem && !isInsideForm) {
+        // Hide all forms if clicked outside mentor cards and forms
+        const allForms = document.querySelectorAll('.send-request-form');
+        allForms.forEach(form => form.style.display = 'none');
+    }
+});
+
             // document.getElementById('search-btn').addEventListener('click', () => {
             //     const skill = document.getElementById('skill-search').value;
 
